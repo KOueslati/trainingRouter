@@ -49,6 +49,16 @@
   border-radius: 4px 0 0 4px;
 }
 
+.heroes a {
+  color: #888;
+  text-decoration: none;
+  position: relative;
+  display: block;
+}
+
+.heroes a:hover {
+  color:#607D8B;
+}
 
 /*
 Copyright Google LLC. All Rights Reserved.
