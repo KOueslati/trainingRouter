@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { HeroListComponent } from './hero-list/hero-list.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
   ],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     HeroesRoutingModule
   ]
 })
