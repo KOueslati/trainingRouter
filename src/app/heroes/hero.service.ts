@@ -4,9 +4,9 @@ import { Observable, of } from 'rxjs';
 
 import { Hero } from './hero';
 import { HEROES } from './mock-heroes';
-import { MessageService } from './message.service';
 import { map, tap, catchError } from 'rxjs/operators';
 import { ErrorHandleService } from '../shared/error-handle.service';
+import { MessageService } from '../shared/message.service';
 
 @Injectable({
   providedIn: 'root',
