@@ -1,0 +1,31 @@
+<div class="container">
+  <form [formGroup]="messagefg" (ngSubmit)="sendMessage()">
+      <div class="row">
+        <h3>Contact Crisis Center</h3>
+      </div>
+    <div class="row">
+      <div class="col">
+        <label for="subject">Subject</label>
+      </div>
+      <div class="col">
+        <input id="subject" class="form-control" formControlName="subject" type="text">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="message">Message</label>
+      </div>
+      <div class="col">
+        <textarea id="my-input" class="form-control" rows="3" formControlName="body"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <button class="btn btn-danger" type="button" (click)="cancelMessage()">Cancel</button>
+      </div>
+      <div class="col-md-4 ml-auto">
+        <button class="btn btn-primary" type="submit">Send</button>
+      </div>
+    </div>
+  </form>
+</div>
