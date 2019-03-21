@@ -1,0 +1,7 @@
+<h3>Admin</h3>
+<nav>
+  <a [routerLink]="[ './' ]" [routerLinkActive]="active" [routerLinkActiveOptions]="{ excat: true}">Dashboard</a>
+  <a [routerLink]="[ './crisis' ]" routerLinkActive="active">Manage Crisis</a>
+  <a [routerLink]="[ './heroes' ]" routerLinkActive="active">Manage Hereos</a>
+</nav>
+<router-outlet></router-outlet>
