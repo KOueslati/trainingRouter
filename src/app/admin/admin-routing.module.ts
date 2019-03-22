@@ -13,6 +13,7 @@ const adminRoutes: Routes = [
     children: [
       {
         path: '',
+        canActivateChild: [AuthGuard],
         children: [
           {
             path: 'crisis', component: ManageCrisesComponent
