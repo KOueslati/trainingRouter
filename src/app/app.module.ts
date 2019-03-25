@@ -12,6 +12,8 @@ import { ComposeMessageComponent } from './compose-message/compose-message.compo
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { CanDeactivateGuard } from './crisis-center/crisis-detail/can-deactivate-guard';
+import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
+import { Router } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -20,8 +22,8 @@ import { CanDeactivateGuard } from './crisis-center/crisis-detail/can-deactivate
     FormsModule,
     ReactiveFormsModule,
     HeroesModule,
-    CrisisCenterModule,
-    AdminModule,
+    // CrisisCenterModule, Romeved to use lazy loading the crisis-center module. See the app-routing module.
+    // AdminModule, Romeved to use lazy loading the admin module. See the app-routing module.
     AuthModule,
     AppRoutingModule
   ],
@@ -30,7 +32,14 @@ import { CanDeactivateGuard } from './crisis-center/crisis-detail/can-deactivate
     PageNotFoundComponent,
     ComposeMessageComponent,
   ],
-  providers: [CanDeactivateGuard],
+  providers: [CanDeactivateGuard, SelectivePreloadingStrategyService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(router: Router) {
+    // Use a custom replacer to display function names in the route configs
+    const replacer = (key, value) => (typeof value === 'function') ? value.name : value;
+
+    console.log('Routes: ', JSON.stringify(router.config, replacer, 2));
+  }
+}

@@ -7,7 +7,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AuthGuard } from '../auth/auth.guard';
 
 const adminRoutes: Routes = [
-  { path: 'admin',
+// tslint:disable-next-line: no-trailing-whitespace
+  {
+    path: '',
     component: AdminComponent,
     canActivate: [AuthGuard],
     children: [
