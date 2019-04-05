@@ -7,6 +7,8 @@ import { CrisisCenterHomeComponent } from './crisis-center-home/crisis-center-ho
 import { CrisisDetailComponent } from './crisis-detail/crisis-detail.component';
 import { CrisisCenterComponent } from './crisis-center.component';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './State/crisis-center.reducer';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     CrisisCenterRoutingModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forFeature('crisises', reducer)
   ]
 })
 export class CrisisCenterModule { }

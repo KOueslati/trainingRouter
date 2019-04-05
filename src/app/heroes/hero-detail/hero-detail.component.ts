@@ -4,6 +4,7 @@ import { HeroService } from '../hero.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-hero-detail',
@@ -14,7 +15,8 @@ export class HeroDetailComponent implements OnInit {
 
   hero$: Observable<Hero>;
 
-  constructor(private heroService: HeroService, private router: Router, private activatedRoute: ActivatedRoute) { }
+// tslint:disable-next-line: max-line-length
+  constructor(private heroService: HeroService, private router: Router, private activatedRoute: ActivatedRoute, private store: Store<any>) { }
 
   ngOnInit() {
     this.hero$ = this.getHero();
@@ -22,11 +24,19 @@ export class HeroDetailComponent implements OnInit {
 
   getHero() {
     return this.activatedRoute.paramMap.pipe(
-      switchMap((params: ParamMap) => this.heroService.getHero(params.get('id'))));
+      switchMap((params: ParamMap) => {
+        const heroId = params.get('id');
+        this.store.dispatch({
+          type: 'HERO-DETAIL',
+          payload: +heroId
+        });
+        return this.heroService.getHero(heroId);
+      }));
   }
 
   goToHereos(hero: Hero) {
-    const heroId = hero ? hero.id : null;
-    this.router.navigate(['hereos', { id: heroId }]);
+    this.router.navigate(['hereos']);
+    // const heroId = hero ? hero.id : null;
+    // this.router.navigate(['hereos', { id: heroId }]);
   }
 }

@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { CanDeactivateGuard } from './crisis-center/crisis-detail/can-deactivate-guard';
 import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
 import { Router } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   imports: [
@@ -22,10 +23,11 @@ import { Router } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     HeroesModule,
-    // CrisisCenterModule, Romeved to use lazy loading the crisis-center module. See the app-routing module.
+    // CrisisCenterModule, Romeved to use preload the crisis-center module. See the app-routing module.
     // AdminModule, Romeved to use lazy loading the admin module. See the app-routing module.
     AuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({})
   ],
   declarations: [
     AppComponent,

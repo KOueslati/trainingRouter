@@ -6,7 +6,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/hereos', pathMatch: 'full' },
+  { path: '', redirectTo: '/crisis-center', pathMatch: 'full' },
   { path: 'contact', component: ComposeMessageComponent, outlet: 'popup' },
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canLoad: [AuthGuard] },
   { path: 'crisis-center', loadChildren: './crisis-center/crisis-center.module#CrisisCenterModule', data: { preload: true } },
@@ -14,7 +14,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, { enableTracing: true, preloadingStrategy: SelectivePreloadingStrategyService })],
+  imports: [RouterModule.forRoot(appRoutes, { preloadingStrategy: SelectivePreloadingStrategyService })],
   exports: [RouterModule]
 })
 

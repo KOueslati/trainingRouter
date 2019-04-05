@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ComposeMessageComponent implements OnInit {
 
-  private messagefg: FormGroup;
+  messagefg: FormGroup;
   constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
