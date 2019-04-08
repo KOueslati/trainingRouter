@@ -5,6 +5,7 @@ import { HeroService } from '../hero.service';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+import * as fromHeroesRoot from '../state/heroes.reducer';
 
 @Component({
   selector: 'app-hero-list',
@@ -16,16 +17,15 @@ export class HeroListComponent implements OnInit {
   heroes: Hero[];
   selectedId: number;
 
-  constructor(private heroService: HeroService, private acRoute: ActivatedRoute, private store: Store<any>) { }
+  constructor(private heroService: HeroService, private acRoute: ActivatedRoute, private store: Store<fromHeroesRoot.HeroesState>) { }
 
   ngOnInit() {
-    this.store.pipe(select('hereos'))
-      .subscribe(hereos => {
-        if (hereos) {
-          console.log(`HeroListComponent: heroId ${hereos.heroId}`);
-          this.selectedId = hereos.heroId;
-        }
-      });
+    this.store.pipe(select(fromHeroesRoot.getHeroId))
+      .subscribe(heroId => {
+        console.log(`HeroListComponent: heroId ${heroId}`);
+        this.selectedId = heroId;
+      }
+      );
 
     this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
     // this.acRoute.paramMap.pipe(

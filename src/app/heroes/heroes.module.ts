@@ -19,7 +19,7 @@ import { reducer } from './state/heroes.reducer';
     BrowserAnimationsModule,
     HeroesRoutingModule,
     FormsModule,
-    StoreModule.forFeature('hereos', reducer)
+    StoreModule.forFeature('heroes', reducer)
   ]
 })
 export class HeroesModule { }

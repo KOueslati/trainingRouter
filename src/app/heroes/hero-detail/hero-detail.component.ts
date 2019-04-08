@@ -5,6 +5,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { HeroesState } from '../state/heroes.reducer';
+import { GetHeroID } from '../state/heroes.actions';
 
 @Component({
   selector: 'app-hero-detail',
@@ -15,8 +17,8 @@ export class HeroDetailComponent implements OnInit {
 
   hero$: Observable<Hero>;
 
-// tslint:disable-next-line: max-line-length
-  constructor(private heroService: HeroService, private router: Router, private activatedRoute: ActivatedRoute, private store: Store<any>) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private heroService: HeroService, private router: Router, private activatedRoute: ActivatedRoute, private store: Store<HeroesState>) { }
 
   ngOnInit() {
     this.hero$ = this.getHero();
@@ -26,10 +28,7 @@ export class HeroDetailComponent implements OnInit {
     return this.activatedRoute.paramMap.pipe(
       switchMap((params: ParamMap) => {
         const heroId = params.get('id');
-        this.store.dispatch({
-          type: 'HERO-DETAIL',
-          payload: +heroId
-        });
+        this.store.dispatch(new GetHeroID(+heroId));
         return this.heroService.getHero(heroId);
       }));
   }

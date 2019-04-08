@@ -15,6 +15,8 @@ import { CanDeactivateGuard } from './crisis-center/crisis-detail/can-deactivate
 import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
 import { Router } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   imports: [
@@ -27,7 +29,12 @@ import { StoreModule } from '@ngrx/store';
     // AdminModule, Romeved to use lazy loading the admin module. See the app-routing module.
     AuthModule,
     AppRoutingModule,
-    StoreModule.forRoot({})
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      name: 'Crisis Center Ng DevTools',
+      maxAge: 25,
+      logOnly: environment.production
+    })
   ],
   declarations: [
     AppComponent,
