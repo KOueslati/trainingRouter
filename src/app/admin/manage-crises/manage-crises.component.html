@@ -1,3 +1,11 @@
-<p>
-  manage-crises works!
-</p>
+<ul class="crises">
+  <li *ngFor="let crisis of crisises$ | async"
+    [class.selected]="crisis.id === selectedId">
+  <a [routerLink]="[crisis.id]">
+      <span class="badge">{{crisis.id}}</span>{{crisis.name}}</a>
+  </li>
+</ul>
+<div *ngIf="message$ | async as message">
+  <textarea class="alert alert-danger">{{message}}</textarea>
+</div>
+<router-outlet></router-outlet>

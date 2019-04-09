@@ -8,7 +8,7 @@ import { Hero } from '../hero';
 export enum HeroesActionTypes {
   GetHeroID = '[Heroes] GetHeroID',
   SetCurrentHero = '[Heroes] SetCurrentHero'
-};
+}
 
 /**
  * Every action is comprised of at least a type and an optional
