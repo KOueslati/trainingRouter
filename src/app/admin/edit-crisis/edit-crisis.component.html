@@ -1,0 +1,21 @@
+<div *ngIf="crisis$ | async as crisis">
+  <h2>{{crisis.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{crisis.id}}</div>
+  <div class="form-group">
+    <label for="editName">name:</label>
+    <input id="my-input" class="form-control" type="text" [(ngModel)]="editName" placeholder="name">
+  </div>
+
+  <div class="row">
+    <div class="col-2">
+      <button class="btn btn-primary" type="button" (click)="saveCrisis()">Save</button>
+    </div>
+    <div class="col-8"></div>
+    <div class="col-2">
+      <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+  <div *ngIf="message" class="alert alert-danger">
+    {{message}}
+  </div>
+</div>

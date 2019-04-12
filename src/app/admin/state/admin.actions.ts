@@ -10,7 +10,11 @@ export enum AdminActionTypes {
   LoadCrisisesSuccess = '[Admin] Load Crisises Success',
   LoadCrisisesFailed = '[Admin] Load Crisises Failed',
   SetCurrentCrisis = '[Admin] Set Current Crisis',
-  SetCurrentCrisisId = '[Admin] Set Current Crisis Identifier'
+  SetCurrentCrisisFailed = '[Admin] Set Current Crisis Failed',
+  SetCurrentCrisisId = '[Admin] Set Current Crisis Identifier',
+  UpdateCrisis = '[Admin] Update Crisis',
+  UpdateCrisisSuccess = '[Admin] Update Crisis Success',
+  UpdateCrisisFailed = '[Admin] Update Crisis Failed'
 }
 
 /**
@@ -39,10 +43,35 @@ export class SetCurrentCrisis implements Action {
   constructor(public payload: Crisis) { }
 }
 
+export class SetCurrentCrisisFailed implements Action {
+  readonly type = AdminActionTypes.SetCurrentCrisisFailed;
+
+  constructor(public payload: string) { }
+}
+
+
 export class SetCurrentCrisisId implements Action {
   readonly type = AdminActionTypes.SetCurrentCrisisId;
 
   constructor(public payload: number) { }
+}
+
+export class UpdateCrisis implements Action {
+  readonly type = AdminActionTypes.UpdateCrisis;
+
+  constructor(public payload: Crisis) { }
+}
+
+export class UpdateCrisisSuccess implements Action {
+  readonly type = AdminActionTypes.UpdateCrisisSuccess;
+
+  constructor(public payload: Crisis) { }
+}
+
+export class UpdateCrisisFailed implements Action {
+  readonly type = AdminActionTypes.UpdateCrisisFailed;
+
+  constructor(public payload: string) { }
 }
 
 /**
@@ -54,4 +83,10 @@ export type AdminActions
   | LoadCrisisesSuccess
   | LoadCrisisesFailed
   | SetCurrentCrisis
-  | SetCurrentCrisisId;
+  | SetCurrentCrisisFailed
+  | SetCurrentCrisisId
+  | UpdateCrisis
+  | UpdateCrisisSuccess
+  | UpdateCrisisFailed;
+
+

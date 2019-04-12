@@ -10,18 +10,22 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducer } from './state/admin.reducer';
 import { AdminEffects } from './state/admin.effects';
+import { EditCrisisComponent } from './edit-crisis/edit-crisis.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AdminComponent,
     AdminDashboardComponent,
     ManageCrisesComponent,
-    ManageHeroesComponent],
+    ManageHeroesComponent,
+    EditCrisisComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     StoreModule.forFeature('admin', reducer),
-    EffectsModule.forFeature([ AdminEffects ])
+    EffectsModule.forFeature([ AdminEffects ]),
+    FormsModule
   ]
 })
 export class AdminModule { }

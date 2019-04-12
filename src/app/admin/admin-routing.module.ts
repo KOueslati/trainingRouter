@@ -5,6 +5,7 @@ import { ManageCrisesComponent } from './manage-crises/manage-crises.component';
 import { ManageHeroesComponent } from './manage-heroes/manage-heroes.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AuthGuard } from '../auth/auth.guard';
+import { EditCrisisComponent } from './edit-crisis/edit-crisis.component';
 
 const adminRoutes: Routes = [
 // tslint:disable-next-line: no-trailing-whitespace
@@ -18,7 +19,14 @@ const adminRoutes: Routes = [
         canActivateChild: [AuthGuard],
         children: [
           {
-            path: 'crisis', component: ManageCrisesComponent
+            path: 'crisis',
+            component: ManageCrisesComponent,
+            children: [
+              {
+                path: ':id',
+                component: EditCrisisComponent
+              }
+            ]
           },
           {
             path: 'heroes', component: ManageHeroesComponent

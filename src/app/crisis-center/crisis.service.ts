@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { Crisis } from './crisis';
 import { CRISES } from './mock-crises';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 import { MessageService } from '../shared/message.service';
 import { ErrorHandleService } from '../shared/error-handle.service';
 
@@ -21,7 +21,12 @@ export class CrisisService {
     return this.getCrises().pipe(
       map((crises: Crisis[]) => crises.find(c => c.id === +id)),
       tap(_ => this.messageService.add(`Fetch crisis ${id}`),
-      this.errorHandleService.handleError('getCrisis', {})
+        this.errorHandleService.handleError('getCrisis', {})
       ));
+  }
+
+  createOrUpdateCrisis(crisis: Crisis): Observable<any> {
+    return of(crisis);
+    // return throwError('can not update crisis ' + crisis.id);
   }
 }
