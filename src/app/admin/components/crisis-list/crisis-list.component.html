@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-4">
     <ul class="crises">
-      <li *ngFor="let crisis of crisises$ | async" [class.selected]="crisis.id === selectedId">
-        <a [routerLink]="[crisis.id]" (click)="setCrisis(crisis.id)">
+      <li *ngFor="let crisis of crisises" [class.selected]="crisis.id === selectedId">
+        <a [routerLink]="[crisis.id]" (click)="selectCrisis(crisis)">
           <span class="badge">{{crisis.id}}</span>{{crisis.name}}</a>
       </li>
     </ul>

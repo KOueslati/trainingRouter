@@ -1,17 +1,6 @@
-import { Crisis } from 'src/app/crisis-center/crisis';
-import { Hero } from 'src/app/heroes/hero';
-import { AdminActionTypes, AdminActions } from './admin.actions';
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { state } from '@angular/animations';
 
-export interface AdminState {
-  crisisId: number | null;
-  crisises: Crisis[];
-  heroId: number;
-  currentHero: Hero;
-  heroes: Hero[];
-  error: string;
-}
+import { AdminActionTypes, AdminActions } from './admin.actions';
+import { AdminState } from './index';
 
 const initialState: AdminState = {
   crisisId: null,
@@ -21,25 +10,6 @@ const initialState: AdminState = {
   heroes: [],
   error: ''
 };
-
-const adminFeatureSelector = createFeatureSelector<AdminState>('admin');
-
-export const getCrisises = createSelector(adminFeatureSelector,
-  // tslint:disable-next-line: no-shadowed-variable
-  state => state.crisises);
-
-export const getCrisisId = createSelector(adminFeatureSelector,
-  // tslint:disable-next-line: no-shadowed-variable
-  state => state.crisisId);
-
-export const getCurrentCrisis = createSelector(adminFeatureSelector,
-  getCrisisId,
-  // tslint:disable-next-line: no-shadowed-variable
-  (state: AdminState, crisisId) => crisisId !== null ? state.crisises.find(c => c.id === crisisId) : null);
-
-export const getError = createSelector(adminFeatureSelector,
-  // tslint:disable-next-line: no-shadowed-variable
-  state => state.error);
 
 // tslint:disable-next-line: no-shadowed-variable
 export function reducer(state = initialState, action: AdminActions): AdminState {

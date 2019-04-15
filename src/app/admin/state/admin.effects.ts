@@ -5,7 +5,7 @@ import * as adminActions from './admin.actions';
 import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
 import { CrisisService } from 'src/app/crisis-center/crisis.service';
 import { Store, select, Action } from '@ngrx/store';
-import * as adminState from './admin.reducer';
+import * as adminState from './index';
 import { Crisis } from 'src/app/crisis-center/crisis';
 
 @Injectable()

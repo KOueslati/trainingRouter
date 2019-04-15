@@ -1,0 +1,5 @@
+<app-crisis-list [crisises]="crisises$ | async" [messageError]="messageError$ | async"
+  [selectedId]="selectedId$ | async" (selected)="selectCrisis($event)"></app-crisis-list>
+
+  <app-edit-crisis [crisis]="crisis$ | async" [editName]="editName$ | async" [message]="messageError$ | async"
+  (crisisUpdateEmitter)="saveCrisis($event)"></app-edit-crisis>
