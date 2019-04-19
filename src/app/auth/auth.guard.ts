@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild, CanLoad, Route } from '@angular/router';
 import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +13,14 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
-    console.log('CanActivate using guard call');
+    state: RouterStateSnapshot): Observable<boolean> {
 
     return this.checkLogin(state.url);
   }
 
   canActivateChild(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+    state: RouterStateSnapshot): Observable<boolean> {
     return this.canActivate(next, state);
   }
 
@@ -31,12 +30,14 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     return this.checkLogin(url);
   }
 
-  checkLogin(url: string): boolean {
-    // tslint:disable-next-line: curly
-    if (this.authService.isUserAuthenticated) return true;
+  checkLogin(url: string) {
+    const isLoggedIn$ = this.authService.isUserAuthenticatedObs();
+    isLoggedIn$.subscribe((loggedIn => {
+      if (!loggedIn) {
+        this.router.navigate(['login', { redirectUrl: url }]);
+      }
+    }));
 
-    this.router.navigate(['login', { redirectUrl: url }]);
-
-    return false;
+    return isLoggedIn$;
   }
 }

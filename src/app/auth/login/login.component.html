@@ -1,10 +1,10 @@
 <h3>Login Page</h3>
 <p>{{message}}</p>
 <div class="row">
-  <button type="button" class="btn btn-primary" (click)="login()" *ngIf="!authService.isUserAuthenticated">
+  <button type="button" class="btn btn-primary" (click)="login()" *ngIf="!isUserLoggedIn()">
     Login
   </button>
-  <button type="button" class="btn btn-danger" (click)="logout()" *ngIf="authService.isUserAuthenticated">
+  <button type="button" class="btn btn-danger" (click)="logout()" *ngIf="isUserLoggedIn()">
     Logout
   </button>
 </div>
