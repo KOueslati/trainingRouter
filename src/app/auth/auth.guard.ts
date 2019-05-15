@@ -13,31 +13,29 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> {
+    state: RouterStateSnapshot): boolean {
 
     return this.checkLogin(state.url);
   }
 
   canActivateChild(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> {
+    state: RouterStateSnapshot): boolean {
     return this.canActivate(next, state);
   }
 
   canLoad(route: Route): boolean | Observable<boolean> | Promise<boolean> {
     const url = route.path ? route.path : '';
-
     return this.checkLogin(url);
   }
 
   checkLogin(url: string) {
-    const isLoggedIn$ = this.authService.isUserAuthenticatedObs();
-    isLoggedIn$.subscribe((loggedIn => {
-      if (!loggedIn) {
-        this.router.navigate(['login', { redirectUrl: url }]);
-      }
-    }));
+    let isLoggedIn = false;
+    this.authService.isUserAuthenticatedObs().subscribe(loggedIn => isLoggedIn = loggedIn);
 
-    return isLoggedIn$;
+    if (!isLoggedIn) {
+      this.router.navigate(['login', { redirectUrl: url }]);
+    }
+    return isLoggedIn || false;
   }
 }
