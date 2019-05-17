@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   redirectUrl: string;
   message: string;
   constructor(private route: ActivatedRoute, private router: Router, public authService: AuthService) {
-    this.message = `User is logged : ${authService.isUserAuthenticated ? 'in' : 'out'}`;
+    this.message = `User is logged : ${this.isUserLoggedIn() ? 'in' : 'out'}`;
   }
 
   ngOnInit() {
@@ -28,29 +28,33 @@ export class LoginComponent implements OnInit {
 
   async login() {
     this.setMessage('try to login...');
-    if (this.authService.isUserAuthenticated) {
-      this.router.navigate([this.redirectUrl ? this.redirectUrl : '\admin']);
-    }
-// tslint:disable-next-line: no-shadowed-variable
-    const promise = new Promise((resolve, reject) =>
-      this.authService.login()
-        .toPromise()
-        .then(
-          () => {
-            this.router.navigate([this.redirectUrl ? this.redirectUrl : '\admin']);
-            resolve();
-          },
-          err => {
-            console.log(err);
-            reject(err);
-          }
-        ));
-    await promise;
+    await this.authService.login(this.redirectUrl);
+
+    // tslint:disable-next-line: no-shadowed-variable
+    // const promise = new Promise((resolve, reject) =>
+    //   this.authService.login(this.redirectUrl)
+    //     .then(
+    //       () => {
+    //         this.router.navigate([this.redirectUrl ? this.redirectUrl : '\admin']);
+    //         resolve();
+    //       },
+    //       err => {
+    //         console.log(err);
+    //         reject(err);
+    //       }
+    //     ));
+    // await promise;
   }
 
   logout() {
     this.setMessage('try to login...');
     this.authService.logout();
+  }
+
+  isUserLoggedIn() {
+    let isLoggedIn = false;
+    this.authService.isUserAuthenticatedObs().subscribe((loggedIn => isLoggedIn = loggedIn));
+    return isLoggedIn;
   }
 
 }

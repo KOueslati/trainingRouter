@@ -18,6 +18,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -43,7 +45,9 @@ import { EffectsModule } from '@ngrx/effects';
     PageNotFoundComponent,
     ComposeMessageComponent,
   ],
-  providers: [CanDeactivateGuard, SelectivePreloadingStrategyService],
+  providers: [CanDeactivateGuard,
+    SelectivePreloadingStrategyService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
