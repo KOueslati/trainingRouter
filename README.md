@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Docker commands
+
+docker build --pull -t aspnetapp .
+docker run --rm -it --name aspnetcore_sample -p 8000:80 aspnetapp
+docker ps (containers)
+docker images (images)
