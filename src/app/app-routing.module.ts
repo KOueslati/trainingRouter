@@ -8,8 +8,8 @@ import { SelectivePreloadingStrategyService } from './selective-preloading-strat
 const appRoutes: Routes = [
   { path: '', redirectTo: '/hereos', pathMatch: 'full' },
   { path: 'contact', component: ComposeMessageComponent, outlet: 'popup' },
-  { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canLoad: [AuthGuard] },
-  { path: 'crisis-center', loadChildren: './crisis-center/crisis-center.module#CrisisCenterModule', data: { preload: true } },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canLoad: [AuthGuard] },
+  { path: 'crisis-center', loadChildren: () => import('./crisis-center/crisis-center.module').then(m => m.CrisisCenterModule), data: { preload: true } },
   { path: '**', component: PageNotFoundComponent }
 ];
 
