@@ -1,7 +1,6 @@
-import { Hero } from '../hero';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { HeroesActionTypes, HeroesActions } from './heroes.actions';
-
+import { createReducer, on } from '@ngrx/store';
+import {HeroActions} from '../index';
+import { Hero } from "../hero";
 
 export interface HeroesState {
   heroId: number;
@@ -15,30 +14,16 @@ const initialState: HeroesState = {
   heroes: []
 };
 
-const getCreateHeroesFeatureSelector = createFeatureSelector<HeroesState>('heroes');
-
-export const getHeroId = createSelector(getCreateHeroesFeatureSelector,
-  state => state.heroId);
-
-export function reducer(state = initialState, action: HeroesActions): HeroesState {
-  console.log(`action type ${action.type}`);
-  console.log(`preloading state ${JSON.stringify(state)}`);
-  switch (action.type) {
-    case HeroesActionTypes.GetHeroID:
-      return {
+export const reducer = createReducer(
+  initialState,
+  on(HeroActions.getHeroId,
+    ((state, {id}) => ({
+      ...state,
+      heroId: id
+    }))),
+    on(HeroActions.setCurrentHero,
+      ((state, {hero}) => ({
         ...state,
-        heroId: action.payload
-      };
-
-    case HeroesActionTypes.SetCurrentHero:
-      return {
-        ...state,
-        currentHero: {
-          ...action.payload
-        }
-      };
-
-    default:
-      break;
-  }
-}
+        currentHero: hero
+      })))
+);

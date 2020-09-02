@@ -20,6 +20,7 @@ import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
       name: 'Crisis Center Ng DevTools',
       maxAge: 25,
       logOnly: environment.production
-    })
+    }),
+    StoreRouterConnectingModule.forRoot()
   ],
   declarations: [
     AppComponent,
