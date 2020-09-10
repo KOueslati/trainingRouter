@@ -1,5 +1,5 @@
 # base image
-FROM node:12.18.0-alpine as node
+FROM node:14.9.0-alpine as node
 
 # This WORKDIR command will create the working directory in our docker image.
 # going forward any command will be run in the context of this directory
